@@ -5,4 +5,4 @@ const sequelize = new Sequelize('doggiebag_db', 'root', 'PassWord1', {
     dialect: 'mysql'
 })
 
-module.export = sequelize;
+module.exports = sequelize;
