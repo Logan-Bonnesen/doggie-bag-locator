@@ -2,13 +2,25 @@ const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/userController.js')
 
-// route for user registration
+// user registration
 router.post('/register', userController.register)
 
-// route for user login
+// user login
 router.post('/login', userController.login)
 
-// route for fetching user data
+// getting user data
 router.get('/profile', userController.getProfile)
+
+//updating user data
+router.put('/:id', userController.updateUser)
+
+// deleting a user
+router.delete('/:id', userController.deleteUser)
+
+// get all users
+router.get('/', userController.getAllUsers)
+
+// get user by id
+router.get('/:id', userController.getUserById)
 
 module.exports = router;
