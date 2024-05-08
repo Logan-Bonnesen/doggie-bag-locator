@@ -101,6 +101,29 @@ const userController = {
             .catch(error => {
                 res.status(500).json(`Internal server error ${error}`)
             })
+    },
+    getAllUsers: (req, res) => {
+        User.findAll()
+        .then(users => {
+            res.status(200).json(users)
+        })
+        .catch(error => {
+            res.status(500).json(`internal server error: ${error}`)
+        })
+    },
+    getUserById: (req, res) => {
+        const userId = req.params.id;
+        
+        User.findByPk(userId)
+        .then(user => {
+            if (!user) {
+                return res.status(404).json('User not found')
+            }
+            res.status(200).json(user)
+        })
+        .catch(error => {
+            res.status(500).json(`Internal server error: ${error}`)
+        })
     }
     
 }
