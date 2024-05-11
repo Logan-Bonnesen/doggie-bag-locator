@@ -14,6 +14,10 @@ Location.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        crossStreets: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
