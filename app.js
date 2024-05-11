@@ -6,6 +6,7 @@ const sequelize = require('./server/config/database.js')
 
 const userRoutes = require('./server/routes/userRoutes.js')
 const petRoutes = require('./server/routes/petRoutes.js')
+const locationRoutes = require('./server/routes/locationRoutes.js')
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // mounting routes
 app.use('/api/users', userRoutes)
 app.use('/api/pets', petRoutes)
+app.use('/api/locations', locationRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
