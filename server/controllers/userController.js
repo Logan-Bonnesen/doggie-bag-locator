@@ -84,6 +84,8 @@ const userController = {
             })
     },
     deleteUser: (req, res) => {
+        const userId = req.params.id;
+
         User.findByPk(userId) 
             .then(user => {
                 if (!user) {
