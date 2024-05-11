@@ -2,7 +2,7 @@ const Pet = require('../models/Pet')
 
 const petController = {
     createPet: (req, res) => {
-        const { name } = req.body;
+        const { name, breed } = req.body;
 
         // check if name field is empty
         if (!name) {
@@ -17,7 +17,7 @@ const petController = {
                 }
                 Pet.create({ name, breed})
                     .then(newPet => {
-                        res.status(201).json(`Pet ${newPet} created`)
+                        res.status(201).json(`Pet ${newPet.name} created`)
                     })
                     .catch(error => {
                         res.status(500).json(`server error ${error}`)
@@ -47,6 +47,8 @@ const petController = {
             })
     },
     deletePet: (req, res) => {
+        const petId = req.params.id
+
         Pet.findByPk(petId)
             .then(pet => {
                 if (!pet) {
