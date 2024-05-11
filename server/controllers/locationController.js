@@ -2,7 +2,7 @@ const Location = require('../models/Location')
 
 const locationController = {
     createLocation: (req, res) => {
-        const { name } = req.body;
+        const { name, crossStreets } = req.body;
 
         // check if name field is empty
         if (!name) {
@@ -15,7 +15,7 @@ const locationController = {
                 if (existingLocation) {
                     return res.status(400).json(`Location ${existingLocation} already exists`)
                 }
-                Location.create({ name, breed})
+                Location.create({ name, crossStreets})
                     .then(newLocation => {
                         res.status(201).json(`Location ${newLocation} created`)
                     })
@@ -27,7 +27,7 @@ const locationController = {
     updateLocation: (req, res) => {
         const locationId = req.params.id;
         // ===========update object below==================
-        const { name, breed } = req.body;
+        const { name, crossStreets } = req.body;
 
         //find Location by ID
         Location.findByPk(locationId) 
@@ -35,7 +35,7 @@ const locationController = {
                 if (!location) {
                     return res.status(404).json(`Location ${location} not found`)
                 }
-                location.update({ name, breed })
+                location.update({ name, crossStreets })
                 .then(updatedLocation => {
                     res.status(200).json(`location data updated successfully: ${updatedLocation}`)
                 })
@@ -48,6 +48,8 @@ const locationController = {
             })
     },
     deleteLocation: (req, res) => {
+        const locationId = req.params.id
+
         Location.findByPk(locationId)
             .then(location => {
                 if (!location) {
