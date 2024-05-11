@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 const sequelize = require('../config/database.js')
-const User = require('./User.js')
-const Location = require('./Location.js')
+
 
 class Comment extends Model {}
 
@@ -24,9 +23,13 @@ Comment.init(
     }
 )
 
+module.exports = Comment
+
+const User = require('./User.js')
+const Location = require('./Location.js')
+
 User.hasMany(Comment)
 Location.hasMany(Comment)
 Comment.belongsTo(User)
 Comment.belongsTo(Location)
 
-module.exports = Comment

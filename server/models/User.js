@@ -1,8 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt')
 const sequelize = require('../config/database.js')
-const Pet = require('./Pet.js')
-const Comment = require('./Comment.js')
+
 
 class User extends Model {
     checkPassword(loginPw) {
@@ -58,8 +57,12 @@ User.init(
     }
 );
 
+module.exports = User;
+
+const Pet = require('./Pet.js')
+const Comment = require('./Comment.js')
+
 // associations
 User.hasMany(Pet);
 User.hasMany(Comment)
 
-module.exports = User;
