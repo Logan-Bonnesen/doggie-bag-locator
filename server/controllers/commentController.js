@@ -39,7 +39,7 @@ const commentController = {
     },
     getCommentsByUser: (req, res) => {
         const { userId } = req.params;
-        Comment.findAll({ where: { locationID }, include: Location })
+        Comment.findAll({ where: { userId }, include: Location })
             .then(comments => {
                 res.json(comments)
             })
