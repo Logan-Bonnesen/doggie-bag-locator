@@ -4,27 +4,27 @@ const Location = require('../models/Location')
 
 const commentController = {
     createComment: (req, res) => {
-        const { text, userId, locationId } = req.body
+        const { text, userId, locationId } = req.body;
         User.findByPk(userId)
             .then(user => {
                 if (!user) {
-                    return res.status(400).json(`User ${user} not found`)
+                    return res.status(400).json(`User ${userId} not found`);
                 }
                 return Location.findByPk(locationId)
-            })
-            .then(location => {
-                if (!location) {
-                    return res.status(400).json(`Location ${location} not found`)
-                }
-                return Comment.create({ text, userId, locationId })
-            })
-            .then(comment => {
-                res.status(201).json(`${comment}`)
+                    .then(location => {
+                        if (!location) {
+                            return res.status(400).json(`Location ${locationId} not found`);
+                        }
+                        return Comment.create({ text, userId, locationId })
+                            .then(comment => {
+                                res.status(201).json(comment);
+                            });
+                    });
             })
             .catch(error => {
-                console.log(error)
-                res.status(500).json(`Server error: ${error}`)
-            })
+                console.log(error);
+                res.status(500).json(`Server error: ${error}`);
+            });
     },
     getCommentsByLocation: (req, res) => {
         const { locationId } = req.params;
