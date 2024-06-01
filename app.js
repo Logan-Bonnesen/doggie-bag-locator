@@ -28,7 +28,7 @@ sequelize.sync({ force: false })
 app.use(bodyParser.json())
 
 // Express serving from 'public'
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 
 // mounting routes
 app.use('/api/users', userRoutes)
