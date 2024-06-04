@@ -21,9 +21,17 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="/login">Login/Register</a>
-                </li>
+               {{#if user}}
+                    <li class="nav-item">
+                        <form action="/api/auth/logout" method="POST" id="logoutForm">
+                            <button type="submit" class="btn btn-link nav-link text-white">Logout</button>
+                        </form>
+                    </li>
+                {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/login">Login/Register</a>
+                    </li>
+                {{/if}}
             </ul>
         </div>
     </div>
