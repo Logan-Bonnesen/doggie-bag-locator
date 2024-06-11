@@ -8,8 +8,6 @@ const flash = require('connect-flash')
 const passport = require('passport')
 const initializePassport = require('./server/config/passport.js')
 
-
-
 const userRoutes = require('./server/routes/userRoutes.js')
 const petRoutes = require('./server/routes/petRoutes.js')
 const locationRoutes = require('./server/routes/locationRoutes.js')
@@ -36,7 +34,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
 
 // Express serving from 'public'
-// app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // express session
 // ******************************************************************************************************************************************************************************
@@ -60,6 +58,7 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg')
   res.locals.error_msg = req.flash('error_msg')
   res.locals.error = req.flash('error')
+  res.locals.user = req.user || null;
   next()
 })
 
@@ -70,10 +69,19 @@ app.use('/api/locations', locationRoutes)
 app.use('/api/comments', commentRoutes)
 app.use('/api/auth', authRoutes)
 
+// render register page
+app.get('/register', (req, res) => {
+  res.render('register', { title: 'Register' })
+})
+
+// render login page
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login' })
+})
 
 
 app.get('/', (req, res) => {
-  res.render('home', { title: 'Home'})
+  res.render('home', { title: 'Home', user: req.user})
 })
 
 app.listen(PORT, () => {
