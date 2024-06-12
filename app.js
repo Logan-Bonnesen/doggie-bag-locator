@@ -71,12 +71,12 @@ app.use('/api/auth', authRoutes)
 
 // render register page
 app.get('/register', (req, res) => {
-  res.render('register', { title: 'Register' })
+  res.render('register', { pageRegister: true })
 })
 
 // render login page
 app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login' })
+  res.render('login', { pageLogin: true })
 })
 
 
