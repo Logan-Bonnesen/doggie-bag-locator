@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const email = document.getElementById('email').value
         const username = document.getElementById('username').value
-        const password = document.getElementById('passwprd').value
+        const password = document.getElementById('password').value
 
         fetch('/api/auth/register', {
             method: 'POST', 
